@@ -1,0 +1,9 @@
+__pycache__
+*.db
+.venv
+.vscode
+.project
+bin
+.DS_Store
+.settings
+.git

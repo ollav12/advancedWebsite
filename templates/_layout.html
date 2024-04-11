@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} – HeadBook™</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js" type="module"></script>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    {% endblock %}
+    {% block script %}{% endblock %}
+</head>
+
+<body>
+    <div id="page">
+        <header id="header">
+            {% block header %}
+            <nav><a href="/">Home</a> – <a href="/profile/">Profile</a> – <a href="/logout/">Logout</a></nav>
+            {% endblock %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </header>
+        <main id="content">
+            {% block content %}{% endblock %}
+        </main>
+        <footer id="footer">
+            {% block footer %}{% endblock %}
+        </footer>
+    </div>
+</body>

@@ -1,0 +1,42 @@
+{% extends "_layout.html" %}
+{% block title %}Home{% endblock %}
+{% block script %}
+<script type="module" nonce="{{g.csp_nonce}}">
+    import { list_users, get_profile, format_profile, do_action } from '/script.js';
+
+    // keep track of the current user in a global variable (the value is expanded by the template processor)
+    window.current_user_id = '{{current_user.id}}';
+
+    // Add some code to be run when the document is loaded (ensures that the
+    // users element actually exist before we call `document.getElementById())
+    // It's `async` because we need to `await` the result of network requests.
+    document.addEventListener("DOMContentLoaded", async (ev) => {
+        let users = await list_users();
+        users = users.map(user => { // for each user...
+            // make an element to display on the page
+            const elt = format_profile(user);
+            // add an event handler to catch clicks
+            elt.addEventListener('click', async (ev) => {
+                // we can set the `data-action` attribute on an element to do
+                // something special (e.g., an "Add buddy" button)
+                if(ev.target.dataset.action) {
+                    do_action(current_user_id, ev.target);
+                } else { // we clicked anywhere else in the user entry
+                    elt.classList.toggle('open'); // open/close the profile details
+                    const details = await get_profile(user.id); // fetch/refresh profile
+                    if (details)
+                        format_profile(details, elt);
+                }
+            });
+            return elt;
+        });
+
+        document.getElementById('users').replaceChildren(...users);
+    })
+</script>
+{% endblock %}
+{% block content %}
+<h1>Welcome to HeadBook™!</h1>
+<p>Click on user to learn more about them:</p>
+<div id="users" class="users">Loading users…</div>
+{% endblock %}

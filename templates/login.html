@@ -1,0 +1,17 @@
+{% extends "_layout.html" %}
+{% from "_field.html" import render_field %}
+{% block title %}Log in to HeadBook{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+<form class="login" action="/login/" method="post">
+    <dl>
+        {{ form.csrf_token }}
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+
+    </dl>
+    <p>
+        {{ form.login }}
+        {{ form.next }}
+</form>
+{% endblock %}

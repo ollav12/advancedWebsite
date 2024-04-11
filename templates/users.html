@@ -1,0 +1,13 @@
+{% for user in users %}
+    {% for key in user %}
+        <li class="field">
+            <span class="key">{{ key }}</span> <span class="value">{{ user[key] }}</span>
+            {% if key == 'picture_url' %}
+                <img src="{{ user[key] }}" alt="{{ user['username'] }}'s profile picture" />
+            {% endif %}
+            {% if key == 'color' %}
+                <div class="color-sample" style="background-color:{{ user[key] }}"></div>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endfor %}

@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+#page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+main {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    /* min-height: 50%; */
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+}
+
+body {
+    margin: 0;
+}
+
+label {
+    justify-self: end;
+}
+
+.users,
+.user {
+    border: 1px solid #444;
+    padding: 0.2rem;
+}
+
+.users {
+    margin: 0.5rem 1rem;
+}
+
+.user {
+    margin: 0.2rem 0;
+    position: relative;
+    padding: 0.5rem;
+    min-height: calc(4rem + 2rem);
+    display: flex;
+    flex-direction: row;
+}
+form.user {
+    flex-direction: column;
+}
+
+form label {
+    min-width: 15rem;
+    text-align: right;
+    display: inline-block;
+    margin: 0.25rem;
+}
+form label::after {
+    content: ': ';
+}
+.user.me .username::after {
+    content: ' ← that’s me!';
+    margin-left: 1rem;
+    font-size: smaller;
+}
+
+.user .data {
+    flex-grow: 1;
+}
+
+.user .controls {
+    flex-grow: 0;
+    margin-left: 0.5rem;
+}
+.user img {
+    max-width: 4rem;
+    max-height: 4rem;
+    border: 1px solid #444;
+    margin-right: 0.5rem;
+}
+
+.field {
+    margin: 0;
+    display: block;
+}
+.field .key::after {
+    content: ': ';
+}
+form .error {
+    color: #a00;
+}
+
+.user .more {
+    display: none;
+}
+
+.user.open .more {
+    display: block;
+}
+
+.color-sample {
+    border: 1px solid black;
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: middle;
+}
